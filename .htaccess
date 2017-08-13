@@ -1,0 +1,8 @@
+RewriteEngine On # 
+RewriteRule ^api/businesses/?$ api/businesses.php [NC,L]
+RewriteRule ^api/businesses/([A-Za-z0-9]+)/?$ api/businesses.php?business_name=$1 [NC,L]
+RewriteRule ^api/business/?$ api/business.php [NC,L]
+RewriteRule ^api/business/([0-9]+)/?$ api/business.php?business_id=$1 [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) api/error-pages/HTTP404.html [L,QSA]

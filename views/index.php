@@ -10,10 +10,7 @@ $cats = $query->selectAll('categories', 5);
             	</div>
                 <form action="businesses_list.php" method="get" class="text-center">
                 	<div class="form-group">
-                		<input type="text" list="companies" name="company" id="main-search" required size="50" placeholder="What Business do you want to find?" value="
-<?php if(sessionCheck('prev_url')){
-    sess('prev_url');
-}?>" autocomplete="off">
+                		<input type="text" list="companies" name="company" id="main-search" required size="50" placeholder="What Business do you want to find?" value="<?php oldInput('company'); ?>" autocomplete="off">
                         <?php if(isset($companies)): ?>
                         <datalist id="companies">
                             <?php foreach($companies as $c):?>

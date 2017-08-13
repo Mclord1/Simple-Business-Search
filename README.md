@@ -1,5 +1,5 @@
 # Inits-Sampleproject - Local Businesses Directory
-It is a simple business search application built on php. It's search functionalities can be accessed via an api cal to "api.php"
+It is a simple business search application built on php. It's search functionalities can be accessed via an api `api/businesses.php?business_name=anyname`
 
 ## Requirements
 
@@ -33,7 +33,9 @@ It is a simple business search application built on php. It's search functionali
 * __2__. Admin access to Create, Update and Delete Categories and Businesses
 * __3__. [jQuery Validation](http://jqueryvalidation.org/)
 * __4__. [Bootstrap](https://getbootstrap.com)
+* __5__. Http Error Pages by [AndiDittrich](https://github.com/AndiDittrich/HttpErrorPages)
 
 Nothing Fancy, Its just a basic app i used to refresh my php knowledge since i have been using frameworks for a while.
+
 
 

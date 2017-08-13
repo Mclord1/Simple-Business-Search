@@ -17,42 +17,7 @@
         <h1>Scheduled Maintenance <small>Error 533</small></h1>
         <p class="lead">This site is currently down for maintenance.<br />
 Our service team is working hard to bring it back online soon.</p>
-		<form action="businesses_list.php" method="get" class="text-center">
-        	<div class="form-group">
-        		<input type="text" list="companies" name="company" id="main-search" required size="50" placeholder="What Business do you want to find?" value="" autocomplete="off">
-        		<datalist id="companies">
-
-                </datalist>
-        	</div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-warning">Search</button>
-            </div>
-        </form>
-        <div id="all"></div>
-        <blockquote id="quote">
- 
-		</blockquote>
-
     </div>
-
-	<script type="text/javascript">
-		function elt(type, value) {
-			var node = document.createElement(type);
-			var child = document.createTextNode(value);
-			node.appendChild(child);
-			return node;
-		}
-		// function getBusiness(){
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", '/inits-sampleproject/api/businesses',false);
-			xhr.send();
-			if(xhr.status == 200){
-				var bod = document.getElementById('quote');
-				bod.innerHTML = xhr.responseXML;
-			}
-		// }
-			
-
-	</script>
-	</body>
+    
+    </body>
 </html>
