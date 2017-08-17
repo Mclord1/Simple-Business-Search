@@ -1,5 +1,4 @@
 <?php
-
 require 'core/factory.php'; //require app dependencies
 
 $router = Router::load('routes.php'); //get the routes.php file

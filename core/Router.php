@@ -29,16 +29,15 @@ class Router
 
 	public function direct($uri,$method)
 	{
-
+		//stripos($uri, "inits-sampleproject/")
 		if(array_key_exists($uri, $this->routes[$method])){
 			
 			return 'views/'.$this->routes[$method][$uri];
 		}
 		else{
-			return 'views/'.$this->routes['GET']['error/404'];
+			die(ini_set('display_errors', '1'));
 		}
 
-		$this->action();
 		
 	}
 }
