@@ -1,5 +1,5 @@
 <?php
-require '../partials/admin_header.php';
+require 'views/partials/admin_header.php';
 
 $views = $query->getALlViews();
 ?>
@@ -25,4 +25,4 @@ $views = $query->getALlViews();
 
 
 <?php
-require '../partials/admin_footer.php';
+require 'views/partials/admin_footer.php';

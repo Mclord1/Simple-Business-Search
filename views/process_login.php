@@ -1,9 +1,7 @@
 <?php
-require '../factory.php';
-
 
 if(isset($_POST['username'])){
-	$user = $_POST['username'];
+	$user = strtolower($_POST['username']);
 	$pass = $_POST['password'];
 	$auth =  $query->auth($user,$pass);
 
@@ -16,7 +14,7 @@ if(isset($_POST['username'])){
 			unset($_SESSION['prev_url']);
 			exit();
 		}else{
-			header("Location: admin/dashboard.php");
+			redirect('/admin');
 		}
 	}
 	if(!$auth){
@@ -26,10 +24,10 @@ if(isset($_POST['username'])){
 					'message' => 'invalid username or password']
 			];
 		$_SESSION['old'] = ['username' => $_POST['username']];
-		header("Location: login.php");
+		redirect('/login');
 	}
 }
 else{
-	header("Location: login.php");
+	redirect('/login');
 }
 ?>

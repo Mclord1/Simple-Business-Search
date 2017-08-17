@@ -1,7 +1,6 @@
 <?php
-require '../../factory.php';
 if(!$query->isAdmin()){
-    header("Location: ../login.php");
+    redirect("/login");
 }
 ?>
 <!DOCTYPE html>
@@ -15,8 +14,8 @@ if(!$query->isAdmin()){
 
     <!-- Fonts -->
     <link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="../../public/css/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="../../public/css/jquery.multiselect.css">
+    <link href="../../public/css/jquery-ui.min.css" rel="stylesheet" type="text/css" >
+    <link href="../../public/css/jquery.multiselect.css" rel="stylesheet" type="text/css" >
     <link href="../../public/css/styles.css" rel="stylesheet" type="text/css">
     </style>
 </head>
@@ -26,25 +25,25 @@ if(!$query->isAdmin()){
             <h2>Admin Panel</h2>
         </div>
         <div class="top-right links" style="text-transform: capitalize;">
-            <a href="../index.php">Main Site</a>
-            <strong><?php if(isset($auth)){ echo $auth->username; }?></strong>
-            <a href="../logout.php">Logout</a>
+            <a href="/">Main Site</a>
+            <strong><?php admin()->username; ?></strong>
+            <a href="/logout">Logout</a>
         </div>
     </header>
     <div class="row position-ref full-height">
             <div class="col-sm-3" id="admin-nav">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a href="../admin/dashboard.php">Dashboard</a>
+                        <a href="/admin">Dashboard</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../admin/add_business.php">Add Business</a>
+                        <a href="/admin/business/new">Add Business</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../admin/categories.php">Categories</a>
+                        <a href="/admin/categories">Categories</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="../admin/view_logs.php">Viewed Businesses</a>
+                        <a href="/admin/views">Viewed Businesses</a>
                     </li>
                 </ul>
             </div>

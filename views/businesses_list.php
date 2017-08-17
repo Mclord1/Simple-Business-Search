@@ -5,7 +5,7 @@ if($_GET['company']) :
 
 	$searchinput = $_GET['company'];
 
-	$businesses = $query->searchWhere('companies',$searchinput);
+	$businesses = $query->searchWhere('businesses',$searchinput);
 endif;
 ?>
 	<div class="container">
@@ -21,7 +21,7 @@ endif;
 						<h5 class="small-caps"><?= $bus->name; ?></h5>
 						<p>
 							<?= $bus->description; ?>
-							<a href="business_details.php?name=<?= $bus->id ?>"> More...</a>
+							<a href="" id="<?= $bus->id ?>" class="more"> More...</a>
 						</p>
 					</li>
 				</div>
@@ -29,6 +29,9 @@ endif;
 					endforeach;
 			endif; ?>	
 			</div>
+			<form method="get" action="/business" id="view_business">
+				<input type="text" name="id" id="business_id" style="display: none;">
+			</form>
 		</div>
 	</div>
 <?php

@@ -1,12 +1,13 @@
 <?php
 
-require '../partials/admin_header.php';
+require 'views/partials/admin_header.php';
+
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 }else{
-	header("Location: dashboard.php");
+	redirect("/admin");
 }
-$business = $query->get('companies','id',$_GET['id']);
+$business = $query->find('businesses','id',$_GET['id']);
 
 $categories = $query->getCategories($_GET['id']);
 
@@ -19,7 +20,7 @@ $cats = $query->selectAll('categories');
 ?>
 	<div class="col-sm-8">
 		<h5>Add Business</h5>
-		<form action="save_business.php" method="post" id="save_business">
+		<form action="/admin/business/update" method="post" id="save_business" enctype="multipart/form-data"> 
 			<?php if(isset($_SESSION['success'])):
 				?>
 			<div class="alert alert-success">
@@ -38,7 +39,7 @@ $cats = $query->selectAll('categories');
 				<select id="category" class="form-control" name="category[]" multiple>
 					<option value="">--None--</option>
 					<?php foreach($cats as $c => $cat): 
-						if(array_search($cat->name, $cat_names)): ?>
+						if(in_array($cat->name, $cat_names)): ?>
 						<option required value="<?= $cat->id ?>" selected><?= $cat->name ?></option>
 					<?php else: ?>
 						<option required value="<?= $cat->id ?>"><?= $cat->name ?></option>
@@ -59,16 +60,17 @@ $cats = $query->selectAll('categories');
 			</div>
 			<div class="form-block">
 				<label for="website">Website</label>
-				<input id="website" class="form-control" type="url" name="website" value="<?= $business->website ?>" required>
+				<input id="website" class="form-control" type="url" name="website" value="http://<?= str_replace('http://', '', $business->website) ?>" required>
 			</div>
 			<div class="form-block">
 				<label for="location">Address</label>
-				<input id="location" class="form-control" type="text" name="location" value="<?= $business->address ?>" required>
+				<input id="location" class="form-control" type="text" name="address" value="<?= $business->address ?>" required>
 			</div>
 			<div class="form-block">
 				<label for="descr">Desciption</label>
 				<textarea id="descr" class="form-control" name="description" required placeholder="Please Describe the business"><?=  $business->description ?></textarea>
 			</div>
+			<input type="hidden" name="id" value="<?= $business->id ?>">
 			
 			<div class="form-block text-center">
 				<input type="submit" class="bg-primary" value="Update">
@@ -78,4 +80,4 @@ $cats = $query->selectAll('categories');
 
 
 <?php
-require '../partials/admin_footer.php';
+require 'views/partials/admin_footer.php';

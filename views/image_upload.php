@@ -2,7 +2,7 @@
 
 require 'views/partials/admin_header.php';
 
-$cats = $query->selectAll('categories');
+$cats = $query->selectAll('uploads');
 ?>
 	<div class="col-sm-8">
 		<h5>Catgories</h5>
@@ -14,13 +14,13 @@ $cats = $query->selectAll('categories');
 					<?php endforeach; ?>
 				</ul>
 			</div>
-			<form class="col-sm-6 ajax-form" action="/admin/category/save" name="create_category" method="post">
+			<form class="col-sm-6" action="/tester" name="create_category" method="post" enctype="multipart/form-data">
 				<div class="form-block">
-					<label>Add Category</label>
-					<input type="text" name="category" value="<?= oldInput('category'); ?>" required>
+					<label>Add Image</label>
+					<input type="file" multiple name="images[]" value="<?= oldInput('images'); ?>" required>
 				</div>
-				<div class="form-block text-center	">
-					<input type="submit" id="ajax-save-btn" class="bg-primary" value="Add">
+				<div class="form-block text-center">
+					<input type="submit" class="bg-primary" value="Add">
 				</div>
 			</form>
 		</div>

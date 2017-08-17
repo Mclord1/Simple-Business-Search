@@ -1,10 +1,10 @@
 <?php
 require 'partials/header.php';
 
-if($_GET['name']) :	
-	$id = $_GET['name'];
-	$log = $query->logView($id);
-	$business = $query->get('companies','id', $id);
+if($_GET['id']) :	
+	$id = $_GET['id'];
+	$log = $query->logView('businesses','business_id',$id);
+	$business = $query->find('businesses','id', $id);
 
 	$categories = $query->selectAll('categories');
 endif;
@@ -36,21 +36,21 @@ endif;
 				<div class="col-md-12 title" style="font-size: 20px; color: maroon">
 					Refine your Search
 				</div>
-				<form action="businesses_list.php" method="get" class="col-md-12">
+				<form action="/businesse/search_results" method="get" class="col-md-12">
 					<div class="input-group">
 						<input type="type" list="categories" name="company" placeholder="what business do you want to find?">
 						<datalist id="categories">
-							<?php foreach($categories as $cat) : ?>
+							<?php if(isset($categories)): foreach($categories as $cat) : ?>
 							<option><?= $cat->name ?></option>
-						<?php endforeach; ?>
+						<?php endforeach; endif;?>
 						</datalist>
 						<button type="submit" class="btn btn-warning">Submit</button>
 					</div>
 				</form>
 				<div class="col-md-12">
-				<?php foreach($categories as $cat) : ?>
-					<li class="list-group-item"><a href="business_category.php" style="color: teal !important;"><?= $cat->name ?></a></li>
-				<?php endforeach; ?>
+				<?php if(isset($categories)): foreach($categories as $cat) : ?>
+					<li class="list-group-item"><a href="#" style="color: teal !important;"><?= $cat->name ?></a></li>
+				<?php endforeach; endif; ?>
 				</div>
 			</div>
 	</div>

@@ -1,15 +1,14 @@
 <?php
-require '../../factory.php';
 if($query->isAdmin() && isset($_GET['id'])){
 	if($query->delete($table,$id)){
-		$_SESSION['success'] = "One Business Deleted Successfully";
-		header("Location: /views/admin/dashboard.php");
+		addSession('success','One Business Deleted Successfully');
 	}else{
-		$_SESSION['failure'] = "OOPs!! Unable to delete Business";
+		addSession('failure','OOPs! Something went wrong');
 	}
+	redirect("/admin");
 
 }
 else{
-	echo "Check the name of your input";
+	addSession('failure','You didnt select any business');
 }
 ?>

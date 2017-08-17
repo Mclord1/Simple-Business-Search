@@ -1,9 +1,7 @@
 <?php
-require '../factory.php';
 if($query->isAdmin()){
-    header("Location: admin/dashboard.php");
+    redirect('/admin');
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,19 +17,20 @@ if($query->isAdmin()){
             <h2>Business Listing</h2>
         </div>
         <div class="top-right links">
-            <a href="login.php">Login</a>
+
+            <a href="login">Login</a>
         </div>
     </header>
     <section id="content" style="margin: 0 auto; text-align: center;">
     	<?php if(sessionCheck('errors')): ?>
     		<div class="alert alert-warning" style="width: 60%; margin: auto;">
     		<?php foreach($errors as $error): ?>
-    			<p><?php echo $error['title'].' : '.$error['message']; unset($_SESSION['errors']);?></p>
+    			<p><?php echo $error['title'].' : '.$error['message']; unsetSession('errors');?></p>
     		<?php endforeach; ?>
     		</div>
     	<?php endif; ?>
     		</div>
-    		<form action="process_login.php" method="POST">
+    		<form action="/login" method="POST">
 				<div class="form-group">
 					<label for="user">Username</label>
 					<input type="text" name="username" required id="user" value="<?php oldInput('username');?>" >

@@ -1,6 +1,6 @@
 <?php
 require 'partials/header.php';
-$companies = $query->selectAll('companies');
+$businesses = $query->selectAll('businesses');
 $cats = $query->selectAll('categories', 5);
 ?>
 		<div class="content ">
@@ -8,13 +8,13 @@ $cats = $query->selectAll('categories', 5);
             	<div class="title">
             		Search for businesses near you
             	</div>
-                <form action="businesses_list.php" method="get" class="text-center">
+                <form action="/businesses/search_results" method="get" class="text-center">
                 	<div class="form-group">
                 		<input type="text" list="companies" name="company" id="main-search" required size="50" placeholder="What Business do you want to find?" value="<?php oldInput('company'); ?>" autocomplete="off">
-                        <?php if(isset($companies)): ?>
+                        <?php if(isset($businesses)): ?>
                         <datalist id="companies">
-                            <?php foreach($companies as $c):?>
-                            <option><?= $c->name ?></option>
+                            <?php foreach($businesses as $b):?>
+                            <option value="<?= $b->name ?>"><?= $b->name ?> : <?= $b->description ?></option>
                         <?php endforeach;?>
                         </datalist>  
                         <?php endif; ?>

@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `companies_directory`
+-- Database: `businesses_directory`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `businesses_views` (
   `id` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL,
+  `business_id` int(11) NOT NULL,
   `views` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,7 +36,7 @@ CREATE TABLE `businesses_views` (
 -- Dumping data for table `businesses_views`
 --
 
-INSERT INTO `businesses_views` (`id`, `company_id`, `views`) VALUES
+INSERT INTO `businesses_views` (`id`, `business_id`, `views`) VALUES
 (1, 1, 9);
 
 -- --------------------------------------------------------
@@ -71,10 +71,10 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `companies`
+-- Table structure for table `businesses`
 --
 
-CREATE TABLE `companies` (
+CREATE TABLE `businesses` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -85,30 +85,30 @@ CREATE TABLE `companies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `companies`
+-- Dumping data for table `businesses`
 --
 
-INSERT INTO `companies` (`id`, `name`, `description`, `address`, `email`, `phone`, `website`) VALUES
+INSERT INTO `businesses` (`id`, `name`, `description`, `address`, `email`, `phone`, `website`) VALUES
 (1, 'Events Couture', 'Corporate and Social events planning, and management', '4, majaro street, fadeyi, lAGOS', 'info@eventscouture.com', '08066553378', 'eventcouture.com\r\n'),
 (4, 'iNITS', 'pastedtextttxx\r\n					\r\n				', '2, majaro street, Onike Lagos', 'info@initsng.com', '09044556677', 'http://initsng.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `companies_categories`
+-- Table structure for table `businesses_categories`
 --
 
-CREATE TABLE `companies_categories` (
+CREATE TABLE `businesses_categories` (
   `id` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL,
+  `business_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `companies_categories`
+-- Dumping data for table `businesses_categories`
 --
 
-INSERT INTO `companies_categories` (`id`, `company_id`, `category_id`) VALUES
+INSERT INTO `businesses_categories` (`id`, `business_id`, `category_id`) VALUES
 (1, 4, 15),
 (2, 4, 2),
 (3, 4, 9);
@@ -143,8 +143,8 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`) VALUES
 --
 ALTER TABLE `businesses_views`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `company_id_2` (`company_id`),
-  ADD KEY `company_id` (`company_id`);
+  ADD UNIQUE KEY `business_id_2` (`business_id`),
+  ADD KEY `business_id` (`business_id`);
 
 --
 -- Indexes for table `categories`
@@ -154,19 +154,19 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `companies`
+-- Indexes for table `businesses`
 --
-ALTER TABLE `companies`
+ALTER TABLE `businesses`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `website` (`website`);
 
 --
--- Indexes for table `companies_categories`
+-- Indexes for table `businesses_categories`
 --
-ALTER TABLE `companies_categories`
+ALTER TABLE `businesses_categories`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comp_cat_index` (`company_id`),
+  ADD KEY `comp_cat_index` (`business_id`),
   ADD KEY `cat_comp_index` (`category_id`);
 
 --
@@ -192,14 +192,14 @@ ALTER TABLE `businesses_views`
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `companies`
+-- AUTO_INCREMENT for table `businesses`
 --
-ALTER TABLE `companies`
+ALTER TABLE `businesses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `companies_categories`
+-- AUTO_INCREMENT for table `businesses_categories`
 --
-ALTER TABLE `companies_categories`
+ALTER TABLE `businesses_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`

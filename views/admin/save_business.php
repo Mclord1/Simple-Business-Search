@@ -1,30 +1,68 @@
 <?php
-require '../../factory.php';
-if($query->isAdmin() && isset($_POST['name'])){
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-	$phone = $_POST['phone'];
-	$website = $_POST['website'];
-	$address = $_POST['location'];
-	$description = $_POST['description'];
-	$categories = $_POST['category'];
+if(!empty($_POST)){
 	
-	$table = 'companies';
-	$columns = ['name','email','phone','website','address','description'];
-	$values = [$name,$email,$phone,$website,$address,$description];
-	if($query->insertAll($table, $columns,$values)){
-		$company = $query->get('companies','email',$email);
+	$request = validate(INPUT_POST, [
+		'name' => 'string',
+		'email' => 'email',
+		'phone' => 'int',
+		'website' => 'url',
+		'address' => 'string',
+		'description' => 'string',
+	]);
+	$request['category'] = [];
+	foreach ($_POST['category'] as $key => $cat) {
+		$c = filter_var($cat,FILTER_VALIDATE_INT);
+		array_push($request['category'], $c);
+	};
+
+	//insert and get an instance of the business
+	$business = $query->insert('businesses',[
+		'name' => $request['name'],
+		'email' => $request['email'],
+		'website' => $request['website'],
+		'phone' => $request['phone'],
+		'address' => $request['address'],
+		'description' => $request['description']
+	]);
+
+	//if insert was successful, add the categories and upload the images
+	if($business){
 		foreach ($categories as $c => $cat) {
-			$query->insertAll('companies_categories', ['company_id','category_id'],[$company->id, $cat]);
+			$query->insert('businesses_categories', [
+				'business_id' => $company->id,
+				'category_id' => $cat
+				]);
 		}
-		$_SESSION['success'] = "One Business Added Successfully";
-		header("Location: add_business.php");
+
+		//Upload the images accept 3 arguments(input_name,folder_name',[mimetypes])
+		$upload_paths= uploadImages('images','images',['jpg','jpeg','png']);
+
+		if($upload_paths){
+			foreach ($upload_paths as $path) {
+
+				$query->insert('uploads',[
+					'business_id' => $business->id,
+					'file_name' => $path
+				]);
+			}
+		}
+
+		$_SESSION['success'] = "Successfully Added ".$business->name;
+		redirect('/admin/business/new');
 	}else{
 		echo mysql_errno();
 	}
 
 }
 else{
-	echo "Check the name of your input";
+	redirect('/admin/business/new');
+	$errors = [];
+	foreach ($_POST as $key => $value) {
+		if(is_null($value)){
+			array_push($errors = $_POST[$key]);
+		}
+	}
+	$_SESSION['errors'][] = $errors;
+	$_SESSION['old'] = $_POST;
 }
 ?>
